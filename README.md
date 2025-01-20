@@ -115,5 +115,4 @@ The graphical interface should include the following structure:
 - Search functionality with filters.
 - A responsive design for mobile and desktop usage.
 - Clear layout for displaying instrument details and recommendations.# University-Python-Tasks
-# University-Python-Tasks
-# University-Python-Tasks
+
