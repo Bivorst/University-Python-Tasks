@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruments in Music</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Instruments in Music</h1>
+    </header>
+    <main id="main-content">
+        <form method="POST" onsubmit="return validateForm()">
+            <section class="search-section">
+                <button type="button" id="back-button" onclick="goBack()" class="back-button hidden">Back</button>
+                <input type="text" name="song_name" class="search-bar" placeholder="Enter song name or genre" id="song-name">
+                <button type="submit" class="search-button">Search</button>
+            </section>
+        </form>
+        
+        {% if message %}
+            <div id="no-results" class="no-results">
+                <div class="no-results-content">
+                    <i class="fa fa-search"></i>
+                    <p>{{ message }}</p>
+                </div>
+            </div>
+        {% endif %}
+        
+        <div id="error-message" class="message" style="display: none;" aria-live="polite">
+            Please enter text to search.
+        </div>
+
+        <section class="results-section">
+            {% for song in result %}
+            <div class="result-card" onclick="selectSong(this)">
+                <div class="song-info">
+                    <h2 class="song-title">{{ song[0] }}</h2>
+                    <div class="instrument-list">
+                        {% for instrument in song[1].split(', ') %}
+                            <a href="#" onclick="showInstrumentInfo('{{ instrument }}')" class="instrument-button">
+                                <i class="fa {{ instrument_icons[instrument] }}"></i> {{ instrument }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+
+        <section id="instrument-info" class="results-section" style="display: none;">
+            <button id="back-button" onclick="goBack()" class="back-button">Back</button>
+            <div id="instrument-details" class="instrument-details styled-details">No instrument selected.</div>
+        </section>
+    </main>
+    <footer id="footer" class="footer">
+        <p>&copy; 2025 Instruments in Music</p>
+    </footer>
+</body>
+</html>
